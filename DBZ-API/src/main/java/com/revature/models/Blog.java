@@ -1,11 +1,18 @@
 package com.revature.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.Data;
 
@@ -28,14 +35,19 @@ public class Blog {
 	@Column(name = "blog_body")
 	private String body;
 	
-	@Column(name = "blog_categories")
-	private String[] categories;
+	@Column(name = "blog_categories") //NOTE: this string is delimited by commas for each category 
+	private String categories;
+	
+	@JsonBackReference
+	@ManyToOne(fetch=FetchType.LAZY) 
+	@JoinColumn(name = "blog_user_id", referencedColumnName = "user_id")
+	private User owner;
 	
 	public Blog() {
 		super();
 	}
 
-	public Blog(int id, String title, String subject, String body, String[] categories) {
+	public Blog(int id, String title, String subject, String body, String categories) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -44,7 +56,7 @@ public class Blog {
 		this.categories = categories;
 	}
 
-	public Blog(String title, String subject, String body, String[] categories) {
+	public Blog(String title, String subject, String body, String categories) {
 		super();
 		this.title = title;
 		this.subject = subject;

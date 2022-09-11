@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 //import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Data;
 
@@ -25,24 +28,24 @@ public class User {
 	@Column(name = "user_id")
 	private int id;
 	
-	@Column(name = "username")
+	@Column(name = "username", unique = true, nullable = false)
 	private String username;
 	
-	@Column(name = "user_password")
+	@Column(name = "user_password", nullable = false)
 	private String password;
 	
-	@Column(name = "user_firstname")
+	@Column(name = "user_firstname", nullable = false)
 	private String firstName;
 	
-	@Column(name = "user_lastname")
+	@Column(name = "user_lastname", nullable = false)
 	private String lastName;
 	
-	@Column(name = "user_email")
+	@Column(name = "user_email", nullable = false)
 	private String email;
 	
 	//@OneToMany(fetch = FetchType.EAGER)//TODO: testing Fetch setting vs Cascade setting when deleting users
-	@OneToMany(cascade = CascadeType.ALL) 
-	@JoinColumn(name = "user_blogs", referencedColumnName = "blog_id")
+	@JsonManagedReference
+	@OneToMany(mappedBy = "owner", cascade = CascadeType.ALL) 
 	private List<Blog> blogs;
 	
 	public User() {
