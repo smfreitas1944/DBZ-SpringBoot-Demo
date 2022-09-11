@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.models.Blog;
@@ -42,4 +43,8 @@ public class UserController {
 		return userServ.getAllUsers();
 	}
 
+	@GetMapping("/find-by-username")
+	public User getUserByUsername(@RequestParam String username) {
+		return userServ.getUserByUsername(username);
+	}
 }
