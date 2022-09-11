@@ -4,6 +4,7 @@ import com.revature.models.ClientMessage;
 
 public class ClientMessageUtil {
 
+	public static final ClientMessage LOGIN_SUCCESSFUL = new ClientMessage("Login successful for given username/password combination.");
 	public static final ClientMessage LOGIN_FAILED = new ClientMessage("Sorry, invalid username and/or password.");
 	public static final ClientMessage REGISTATION_SUCCESSFUL = new ClientMessage("Success! Your user profile is now live!");
 	public static final ClientMessage REGISTATION_FAILED = new ClientMessage("Something went wrong during registration.");

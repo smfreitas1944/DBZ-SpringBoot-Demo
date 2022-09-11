@@ -18,8 +18,9 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public boolean login(String username, String password) {
-		// TODO Auto-generated method stub
-		return false;
+		User target = getUserByUsername(username);
+		System.out.println("Found user: " + target);
+		return (target.getUsername().equals(username) && target.getPassword().equals(password)) ? true : false;
 	}
 
 	@Override
@@ -41,14 +42,14 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public User getUserById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return userRepo.findById(id);
 	}
 
 	@Override
 	public User getUserByUsername(String username) {
-		// TODO Auto-generated method stub
-		return null;
+		User target = userRepo.findByUsernameStartsWith(username);
+		System.out.println("Found user: " + target);
+		return target;
 	}
 
 	@Override

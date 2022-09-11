@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.revature.models.Blog;
 import com.revature.models.ClientMessage;
+import com.revature.models.LoginTemplate;
 import com.revature.models.User;
 import com.revature.services.UserService;
 
@@ -27,6 +29,12 @@ public class UserController {
 	@PostMapping("/register")
 	public ClientMessage registerNewProfile(@RequestBody User user) {
 		return userServ.registerUser(user) ? REGISTATION_SUCCESSFUL : REGISTATION_FAILED;
+	}
+	
+	@PostMapping("/login")
+	public ClientMessage loginUser(@RequestBody LoginTemplate body) {
+		System.out.println("body: " + body);
+		return userServ.login(body.getUsername(), body.getPassword()) ? LOGIN_SUCCESSFUL : LOGIN_FAILED;
 	}
 	
 	@GetMapping("/view-all")
