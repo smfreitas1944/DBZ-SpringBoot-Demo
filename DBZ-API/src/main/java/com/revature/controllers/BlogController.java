@@ -2,8 +2,11 @@ package com.revature.controllers;
 
 import static com.revature.util.ClientMessageUtil.*;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,4 +29,8 @@ public class BlogController {
 		return blogServ.createNewBlogPost(blog) ? CREATION_SUCCESSFUL : CREATION_FAILED;
 	}
 
+	@GetMapping("/view-all")
+	public List<Blog> getAllBlogs(){
+		return blogServ.getAllBlogs();
+	}
 }

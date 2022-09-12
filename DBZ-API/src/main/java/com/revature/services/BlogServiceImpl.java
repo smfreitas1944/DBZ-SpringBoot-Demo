@@ -24,8 +24,7 @@ public class BlogServiceImpl implements BlogService{
 
 	@Override
 	public List<Blog> getAllBlogs() {
-		// TODO Auto-generated method stub
-		return null;
+		return blogRepo.findAll();
 	}
 
 	@Override
