@@ -7,7 +7,7 @@ import com.revature.models.Blog;
 public interface BlogService {
 
 	//create blog
-	public boolean createNewBlogPost(Blog blog);
+	public Blog createNewBlogPost(Blog blog, int userId);
 	
 	//get all blogs
 	public List<Blog> getAllBlogs();

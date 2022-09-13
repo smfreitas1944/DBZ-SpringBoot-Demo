@@ -39,30 +39,28 @@ public class Blog {
 	private String categories;
 	
 	@JsonBackReference
-	@ManyToOne
-	@JoinColumn(name = "blog_user_id", referencedColumnName = "user_id")
+	@ManyToOne(cascade=CascadeType.PERSIST, fetch=FetchType.LAZY)
+	@JoinColumn(name = "blog_user_id")
 	private User owner;
 	
 	public Blog() {
 		super();
 	}
 
-	public Blog(int id, String title, String subject, String body, String categories, User owner) {
+	public Blog(int id, String title, String subject, String body, String categories) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.subject = subject;
 		this.body = body;
 		this.categories = categories;
-		this.owner = owner;
 	}
 
-	public Blog(String title, String subject, String body, String categories, User owner) {
+	public Blog(String title, String subject, String body, String categories) {
 		super();
 		this.title = title;
 		this.subject = subject;
 		this.body = body;
 		this.categories = categories;
-		this.owner = owner;
 	}
 }

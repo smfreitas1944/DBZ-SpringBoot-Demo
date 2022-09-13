@@ -15,9 +15,6 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 	@Query(value="UPDATE users SET username=?1, user_password=?2, user_firstname=?3, user_lastname=?4, user_email=?5 WHERE user_id=?6", nativeQuery=true)
 	public boolean update(String username, String password, String firstname, String lastname, String email, int id);
 	
-	@Query(value="SELECT * FROM users WHERE user_id=?1", nativeQuery=true)
-	public User findById(int id);
-	
 	@Query(value="select * from users where username like ?1", nativeQuery = true)
 	public User findByUsernameStartsWith(String username);
 }

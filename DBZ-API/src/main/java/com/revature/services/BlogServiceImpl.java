@@ -1,25 +1,43 @@
 package com.revature.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.revature.models.Blog;
+import com.revature.models.User;
 import com.revature.repositories.BlogRepository;
 
 @Service
-@Transactional
 public class BlogServiceImpl implements BlogService{
 	
 	@Autowired
 	private BlogRepository blogRepo;
+	
+	@Autowired
+	private UserService userService;
 
 	@Override
-	public boolean createNewBlogPost(Blog blog) {
-		int pk = blogRepo.save(blog).getId();
-		return (pk > 0) ? true : false;
+	public Blog createNewBlogPost(Blog blog, int userId) {
+		
+		Optional<User> user = Optional.of(userService.getUserById(userId));
+		
+		// if a User with that ID ACTUALLY exists in the DB...
+		if (user.isPresent()) {
+			// set the blog's owner property to the value of the user obj
+			blog.setOwner(user.get());
+		} else {
+			// ideally customize this to be a cutom exception
+			// throw new UserNotFoundException();
+			System.out.println("No user found!");
+		}
+		
+		return blogRepo.save(blog);
+
 	}
 
 	@Override
