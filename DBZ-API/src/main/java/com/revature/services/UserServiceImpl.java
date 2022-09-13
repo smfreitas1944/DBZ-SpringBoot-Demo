@@ -20,6 +20,7 @@ public class UserServiceImpl implements UserService{
 	public boolean login(String username, String password) {
 		User target = getUserByUsername(username);
 		System.out.println("Found user: " + target);
+		
 		return (target.getUsername().equals(username) && target.getPassword().equals(password)) ? true : false;
 	}
 
