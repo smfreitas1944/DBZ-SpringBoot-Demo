@@ -47,20 +47,22 @@ public class Blog {
 		super();
 	}
 
-	public Blog(int id, String title, String subject, String body, String categories) {
+	public Blog(int id, String title, String subject, String body, String categories, User owner) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.subject = subject;
 		this.body = body;
 		this.categories = categories;
+		this.owner = owner;
 	}
 
-	public Blog(String title, String subject, String body, String categories) {
+	public Blog(String title, String subject, String body, String categories, User owner) {
 		super();
 		this.title = title;
 		this.subject = subject;
 		this.body = body;
 		this.categories = categories;
+		this.owner = owner;
 	}
 }
