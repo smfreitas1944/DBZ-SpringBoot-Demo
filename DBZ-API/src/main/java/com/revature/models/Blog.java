@@ -39,7 +39,7 @@ public class Blog {
 	private String categories;
 	
 	@JsonBackReference
-	@ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL) 
+	@ManyToOne
 	@JoinColumn(name = "blog_user_id", referencedColumnName = "user_id")
 	private User owner;
 	

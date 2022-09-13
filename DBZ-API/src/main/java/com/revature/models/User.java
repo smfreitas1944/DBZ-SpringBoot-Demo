@@ -45,7 +45,7 @@ public class User {
 	
 	//@OneToMany(fetch = FetchType.EAGER)//TODO: testing Fetch setting vs Cascade setting when deleting users
 	@JsonManagedReference
-	@OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.EAGER) 
+	@OneToMany(mappedBy = "owner") 
 	private List<Blog> blogs;
 	
 	public User() {
