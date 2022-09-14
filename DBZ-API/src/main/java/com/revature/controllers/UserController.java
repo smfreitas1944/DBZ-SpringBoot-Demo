@@ -5,13 +5,8 @@ import static com.revature.util.ClientMessageUtil.*;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
 import com.revature.models.Blog;
 import com.revature.models.ClientMessage;
@@ -43,8 +38,23 @@ public class UserController {
 		return userServ.getAllUsers();
 	}
 
+	@GetMapping("/{id}")
+	public @ResponseBody User getUserById(@PathVariable int id){
+		return userServ.getUserById(id);
+	}
+
 	@GetMapping("/find-by-username")
 	public User getUserByUsername(@RequestParam String username) {
 		return userServ.getUserByUsername(username);
+	}
+
+	@PutMapping(value="/update", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody int updateUserById(@RequestBody User user){
+		return userServ.updateUser(user);
+	}
+
+	@DeleteMapping("/delete")
+	public boolean deleteUser(@RequestBody User user){
+		return userServ.deleteUser(user);
 	}
 }

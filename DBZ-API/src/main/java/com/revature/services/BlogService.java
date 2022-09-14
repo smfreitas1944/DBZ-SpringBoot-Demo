@@ -20,13 +20,17 @@ public interface BlogService {
 	
 	//get blogs by search term
 	public List<Blog> getBlogsBySearchTerm(String searchTerm);
+
+	//by category
+	List<Blog> getBlogsByCategory(String category);
 	
 	//update blog
-	public boolean updateBlog(Blog blog);
+	public int updateBlog(Blog blog);
 	
 	//update owner of blog
 	public boolean updateOwnerOfBlog(Blog blog, int ownerId);
 	
 	//delete blog
 	public boolean deleteBlog(Blog blog);
+
 }

@@ -1,5 +1,6 @@
 package com.revature.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,15 +48,29 @@ public class BlogServiceImpl implements BlogService{
 
 	@Override
 	public Blog getBlogByBlogId(int id) {
-		// TODO Auto-generated method stub
+
+		Optional<Blog> blog = blogRepo.findById(id);
+
+		if(blog.isPresent()){
+			return blog.get();
+		}
+
 		return null;
 	}
 
 	@Override
 	public List<Blog> getBlogsByOwnerId(int ownerId) {
-		// TODO Auto-generated method stub
-		return null;
+
+		List<Blog> blogs = Optional.of(blogRepo.findByOwnerId(ownerId)).get();
+		return blogs;
 	}
+
+
+	public List<Blog> getBlogsByCategory(String category) {
+		List<Blog> blogs = Optional.of(blogRepo.findByCategory(category)).get();
+		return blogs;
+	}
+
 
 	@Override
 	public List<Blog> getBlogsBySearchTerm(String searchTerm) {
@@ -64,9 +79,10 @@ public class BlogServiceImpl implements BlogService{
 	}
 
 	@Override
-	public boolean updateBlog(Blog blog) {
-		// TODO Auto-generated method stub
-		return false;
+	public int updateBlog(Blog blog) {
+//		update(String title, String subject, String body, String categories, int id);
+		return blogRepo.update(blog.getTitle(), blog.getSubject(),blog.getBody(),blog.getCategories(),blog.getId());
+
 	}
 
 	@Override
@@ -77,8 +93,10 @@ public class BlogServiceImpl implements BlogService{
 
 	@Override
 	public boolean deleteBlog(Blog blog) {
-		// TODO Auto-generated method stub
-		return false;
+
+		blogRepo.delete(blog);
+
+		return true;
 	}
 
 }

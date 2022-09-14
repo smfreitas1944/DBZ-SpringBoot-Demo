@@ -44,7 +44,7 @@ public class User {
 	private String email;
 	
 	@JsonManagedReference
-	@OneToMany(mappedBy = "owner", fetch=FetchType.LAZY, cascade=CascadeType.MERGE) 
+	@OneToMany(mappedBy = "owner", fetch=FetchType.LAZY, cascade=CascadeType.ALL, orphanRemoval = true)
 	private List<Blog> blogs;
 	
 	public User() {
@@ -71,5 +71,14 @@ public class User {
 		this.lastName = lastName;
 		this.email = email;
 		this.blogs = blogs;
+	}
+	public User(int id,String username, String password, String firstName, String lastName, String email) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
 	}
 }
