@@ -4,14 +4,10 @@ import static com.revature.util.ClientMessageUtil.*;
 
 import java.util.List;
 
+import com.revature.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
 import com.revature.models.Blog;
 import com.revature.models.ClientMessage;
@@ -34,4 +30,33 @@ public class BlogController {
 	public List<Blog> getAllBlogs(){
 		return blogServ.getAllBlogs();
 	}
+
+	@GetMapping(value="/{id}")
+	public @ResponseBody Blog getBlogByID(@PathVariable int id){
+		return blogServ.getBlogByBlogId(id);
+	}
+
+	@GetMapping(value="/user_id/{id}")
+	public @ResponseBody List<Blog> gBlogByOwnerId (@PathVariable int id){
+		return blogServ.getBlogsByOwnerId(id);
+	}
+
+	@GetMapping(value="/category/{category}")
+	public @ResponseBody List<Blog> getBlogByCategory (@PathVariable String category){
+		return blogServ.getBlogsByCategory(category);
+	}
+
+	//add view all categories
+
+	@PutMapping(value="/update", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public int updateBlogById(@RequestBody Blog blog){
+		return blogServ.updateBlog(blog);
+	}
+
+	@DeleteMapping("/delete")
+	public Boolean deleteBlog(@RequestBody Blog blog){
+		return blogServ.deleteBlog(blog);
+	}
+
+
 }
