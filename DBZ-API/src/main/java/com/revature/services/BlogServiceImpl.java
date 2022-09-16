@@ -67,7 +67,7 @@ public class BlogServiceImpl implements BlogService{
 
 
 	public List<Blog> getBlogsByCategory(String category) {
-		List<Blog> blogs = Optional.of(blogRepo.findByCategory(category)).get();
+		List<Blog> blogs = Optional.of(blogRepo.findByCategoriesContaining(category)).get();
 		return blogs;
 	}
 

@@ -30,8 +30,11 @@ public interface BlogRepository extends JpaRepository<Blog, Integer>{
 	@Query(value="SELECT * FROM blogs WHERE blog_user_id=?1", nativeQuery=true)
 	public List<Blog> findByOwnerId(int id);
 
-	@Query(value="SELECT * FROM blogs WHERE blog_categories like ?1", nativeQuery=true)
-	public List<Blog> findByCategory(String category);
+//	@Query(value="SELECT * FROM blogs WHERE blog_categories like ?1", nativeQuery=true)
+//	public List<Blog> findByCategory(String category);
+	
+	
+	public List<Blog> findByCategoriesContaining(String catergory);
 
 	@Query(value = "DELETE FROM blogs WHERE blog_user_id=?1", nativeQuery = true)
 	public Boolean deleteAllByUserId(int id);
