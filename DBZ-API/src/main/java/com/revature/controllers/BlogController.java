@@ -15,7 +15,7 @@ import com.revature.services.BlogService;
 
 @RestController
 @RequestMapping("/api/blogs")
-@CrossOrigin(origins= {"http://localhost:4200"})
+@CrossOrigin(origins= {"http://localhost:4200", "http://the-dbz-api.s3-website-us-east-1.amazonaws.com"})
 public class BlogController {
 	
 	@Autowired
